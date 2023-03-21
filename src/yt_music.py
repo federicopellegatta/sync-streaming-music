@@ -2,7 +2,7 @@ from ytmusicapi import YTMusic
 import pandas as pd
 import os
 from song import Song
-from utils.bcolors import bcolors
+from cli.bcolors import bcolors
 from utils.string_utils import title_case
 from dotenv import load_dotenv
 
