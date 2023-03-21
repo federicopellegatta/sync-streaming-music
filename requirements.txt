@@ -1,4 +1,6 @@
 ytmusicapi~=0.25
 pandas~=1.4
 python-dotenv~=1.0
+chardet~=5.1
 spotipy~=2.22
+
