@@ -4,6 +4,10 @@ from utils.string_utils import string_similarity, remove_parenthesis_content, ge
 from ytmusicapi import YTMusic
 
 
+def join_artists_names(artists: list) -> str:
+    return ", ".join(map(lambda artist: artist["name"] if type(artist) is dict else artist, artists))
+
+
 @dataclass
 class Song:
 
@@ -28,6 +32,26 @@ class Song:
 
         song = cls(track, artist, album,
                    duration, is_explicit, year)
+        return song
+
+    @classmethod
+    def get_song_from_json(cls, args) -> Song:
+        track = args["name"]
+        artist = join_artists_names(map(lambda a: a["name"], args["artists"]))
+        album = args["album"]["name"]
+        duration = args["duration_ms"] / \
+            1000 if args["duration_ms"] is not None else None
+        is_explicit = args["explicit"]
+
+        match args["album"]["release_date_precision"]:
+            case "day" | "month":
+                year = args["album"]["release_date"].split("-")[0]
+            case "year":
+                year = args["album"]["release_date"]
+            case _:
+                year = None
+
+        song = cls(track, artist, album, duration, is_explicit, year)
         return song
 
     def get_search_query(self) -> str:
@@ -66,12 +90,9 @@ class Song:
     def is_similar_artist(self, artists: str, is_detailed_search: bool = True) -> bool:
         self_artist = self.artist if is_detailed_search else self.artist.split(",")[
             0]
-        other_artist = self.join_artists_names(
+        other_artist = join_artists_names(
             artists) if is_detailed_search else artists[0]["name"]
         return string_similarity(self_artist, other_artist) > 0.8
-
-    def join_artists_names(self, artists: list) -> str:
-        return ", ".join(map(lambda artist: artist["name"] if type(artist) is dict else artist, artists))
 
     def is_similar_album(self, album: str, is_detailed_search: bool = True) -> bool:
         return string_similarity(remove_parenthesis_content(self.album), remove_parenthesis_content(album)) > 0.5 if is_detailed_search else True

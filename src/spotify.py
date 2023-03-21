@@ -1,10 +1,11 @@
 import os
-import json
-import time
 import spotipy
 from spotipy.client import Spotify
-from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 from dotenv import load_dotenv
+from cli.bcolors import bcolors
+
+
+from playlist import Playlist
 
 
 def setup_Spotipy() -> Spotify:
@@ -21,9 +22,23 @@ def setup_Spotipy() -> Spotify:
     return spotipy.Spotify(auth_manager=oauth)
 
 
+def get_playlists(spotify: Spotify) -> list[Playlist]:
+    current_user = spotify.current_user()
+    print(
+        f"{bcolors.HEADER}Searching for {current_user['display_name']}'s playlists...{bcolors.ENDC}")
+
+    playlists_json = spotify.current_user_playlists()
+    print(
+        f"{bcolors.OKBLUE}Found {playlists_json['total']} playlist(s){bcolors.ENDC}")
+    playlists = []
+    for playlist_json in enumerate(playlists_json['items']):
+        playlist = Playlist.get_playlist_from_json(playlist_json, spotify)
+        print(f"Found playlist {playlist.name} ({len(playlist.songs)} songs)")
+        playlists.append(playlist)
+
+    return playlists
+
+
 if __name__ == "__main__":
     spotify: Spotify = setup_Spotipy()
-
-    playlists = spotify.current_user_playlists()
-    for idx, playlist in enumerate(playlists['items']):
-        print(playlist['name'])
+    playlists = get_playlists(spotify)
