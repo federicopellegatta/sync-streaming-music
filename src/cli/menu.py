@@ -1,4 +1,3 @@
-from pprint import pprint
 import inquirer
 from cli.operation import Operation
 from cli.bcolors import bcolors

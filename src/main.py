@@ -1,8 +1,8 @@
 from cli.bcolors import bcolors
-from spotify import get_playlists, setup_Spotipy
+from spotify import setup_Spotipy
 from sync import sync_spotify_to_ytmusic
-from yt_music import setup_YTMusic, sync_playlist
-from cli.menu import main_menu, playlists_checkbox
+from yt_music import setup_YTMusic
+from cli.menu import main_menu
 from cli.operation import Operation
 
 
