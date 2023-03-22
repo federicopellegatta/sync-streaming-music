@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from cli.bcolors import bcolors
 
 
-from playlist import Playlist
+from playlist import Playlist, get_playlist_from_spotify
 
 
 def setup_Spotipy() -> Spotify:
@@ -25,20 +25,18 @@ def setup_Spotipy() -> Spotify:
 def get_playlists(spotify: Spotify) -> list[Playlist]:
     current_user = spotify.current_user()
     print(
-        f"{bcolors.HEADER}Searching for {current_user['display_name']}'s playlists...{bcolors.ENDC}")
+        f"{bcolors.OKCYAN}Searching for {current_user['display_name']}'s playlists...{bcolors.ENDC}")
 
     playlists_json = spotify.current_user_playlists()
-    print(
-        f"{bcolors.OKBLUE}Found {playlists_json['total']} playlist(s){bcolors.ENDC}")
+    number_of_playlists = playlists_json['total']
+    print(f"{bcolors.BOLD}Found {number_of_playlists} playlist(s):{bcolors.ENDC}")
+
+    right_justify = len(str(number_of_playlists))
     playlists = []
-    for playlist_json in enumerate(playlists_json['items']):
-        playlist = Playlist.get_playlist_from_json(playlist_json, spotify)
-        print(f"Found playlist {playlist.name} ({len(playlist.songs)} songs)")
+    for idx, playlist_json in enumerate(playlists_json['items']):
+        playlist = get_playlist_from_spotify(playlist_json, spotify)
+        print(
+            f"{str(idx + 1).rjust(right_justify)}. {playlist.name} ({len(playlist.songs)} songs)")
         playlists.append(playlist)
 
     return playlists
-
-
-if __name__ == "__main__":
-    spotify: Spotify = setup_Spotipy()
-    playlists = get_playlists(spotify)

@@ -1,8 +1,19 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from song import Song
+from song import Song, get_song_from_spotify_json
 from spotipy.client import Spotify
 from cli.bcolors import bcolors
+
+
+def get_playlist_from_spotify(json, spotify: Spotify) -> Playlist:
+    name = json["name"]
+    id = json["id"]
+    image = json["images"][0]["url"] if len(json["images"]) > 0 else None
+    description = json["description"]
+    total_songs = json["tracks"]["total"]
+    songs = get_songs_by_playlist_id(id, total_songs, spotify)
+
+    return Playlist(name, id, image, description, songs)
 
 
 def get_songs_by_playlist_id(playlist_id: str, total_songs: int, spotify: Spotify) -> list[Song]:
@@ -25,7 +36,7 @@ def get_songs_by_playlist_id(playlist_id: str, total_songs: int, spotify: Spotif
 
     songs = []
     for song in songs_json:
-        songs.append(Song.get_song_from_json(song["track"]))
+        songs.append(get_song_from_spotify_json(song["track"]))
 
     if (total_songs != len(songs)):
         print(f"{bcolors.WARNING}WARNING: Playlist ID {playlist_id}: {total_songs} songs were expected, but only {len(songs)} were found{bcolors.ENDC}")
@@ -42,20 +53,6 @@ class Playlist:
         self.image: str = image
         self.description: str = description
         self.songs: list[Song] = songs
-
-    @ classmethod
-    def get_playlist_from_json(cls, args, spotify: Spotify) -> Playlist:
-        json = args[1]
-
-        name = json["name"]
-        id = json["id"]
-        image = json["images"][0]["url"] if len(json["images"]) > 0 else None
-        description = json["description"]
-        total_songs = json["tracks"]["total"]
-        songs = get_songs_by_playlist_id(id, total_songs, spotify)
-
-        playlist = cls(name, id, image, description, songs)
-        return playlist
 
     def __str__(self):
         return "Playlist{name=" + self.name + ", id=" + self.id + ", image=" + self.image + ", description=" + self.description + "}"

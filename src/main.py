@@ -1,10 +1,12 @@
 from cli.bcolors import bcolors
-from yt_music import setup_YTMusic, sync_playlists
+from spotify import get_playlists, setup_Spotipy
+from yt_music import setup_YTMusic, sync_playlist
 from cli.menu import menu
 from cli.operation import Operation
 
 
 if __name__ == "__main__":
+    spotify = setup_Spotipy()
     ytmusic = setup_YTMusic()
 
     playlists_dir = 'resources/playlists/'
@@ -12,18 +14,21 @@ if __name__ == "__main__":
     operation: Operation = menu()
 
     match operation:
-        case Operation.GET_SPOTIFY_PLAYLISTS:
-            print(f"{bcolors.OKBLUE}Getting Spotify playlists...{bcolors.ENDC}")
-            print(f"{bcolors.WARNING}Not implemented yet...{bcolors.ENDC}")
-
-        case Operation.SYNC_YOUTUBE_PLAYLISTS_FROM_CSV:
-            print(
-                f"{bcolors.OKBLUE}Syncing YouTube playlists from CSV files...{bcolors.ENDC}")
-            sync_playlists(ytmusic, playlists_dir)
 
         case Operation.SYNC_YOUTUBE_PLAYLISTS_WITH_SPOTIFY:
             print(
-                f"{bcolors.OKBLUE}Syncing YouTube playlists with Spotify...{bcolors.ENDC}")
+                f"{bcolors.HEADER}{bcolors.BOLD}{bcolors.UNDERLINE}{Operation.SYNC_YOUTUBE_PLAYLISTS_WITH_SPOTIFY.value}...{bcolors.ENDC}")
+            playlists = get_playlists(spotify)
+
+            for playlist in playlists:
+                sync_playlist(playlist, ytmusic)
+
+            print(
+                f"{bcolors.OKGREEN}{len(playlists)} have been synced to YT Music{bcolors.ENDC}")
+
+        case Operation.SYNC_SPOTIFY_PLAYLISTS_WITH_YOUTUBE:
+            print(
+                f"{bcolors.HEADER}{bcolors.BOLD}{bcolors.UNDERLINE}{Operation.SYNC_SPOTIFY_PLAYLISTS_WITH_YOUTUBE.value}...{bcolors.ENDC}")
             print(f"{bcolors.WARNING}Not implemented yet...{bcolors.ENDC}")
 
         case _:

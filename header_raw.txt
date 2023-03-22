@@ -1,0 +1,36 @@
+accept: */*
+accept-encoding: gzip, deflate, br
+accept-language: it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: SAPISIDHASH 1679311387_dfff4144ded224a54edf530d38964eb140b2061f
+content-length: 2035
+content-type: application/json
+cookie: VISITOR_INFO1_LIVE=ynhkxBlC3GY; DEVICE_INFO=ChxOekU0TnpZM016RXdPVFV6T1RnMk16SXdOZz09EJz9/p0GGJz9/p0G; PREF=tz=Europe.Rome&f5=30000&f6=40000000&f7=100; YSC=dMhXZcuXWOQ; _gcl_au=1.1.1666305805.1679311190; SID=UggYhjeAjFC2ZxpBtG_aCveQ2Jy42NhFFr0OnRDebs-F4kFwbUHI38GSrVnOSZ09GJxD0w.; __Secure-1PSID=UggYhjeAjFC2ZxpBtG_aCveQ2Jy42NhFFr0OnRDebs-F4kFwKcsW5KmMmeg6q742w7WaUA.; __Secure-3PSID=UggYhjeAjFC2ZxpBtG_aCveQ2Jy42NhFFr0OnRDebs-F4kFwmk1S65kjde-f5FDx_ouElg.; HSID=ASXi3Ge0ewWXm-VMr; SSID=A4v1DnshKFwgKhYU0; APISID=mTFGjWb4BbfvjqN-/AWJ_bKGK7XbCF5n6F; SAPISID=TPMRXnKSgDFnsNPj/AHn0QC9CU3LdRoXzv; __Secure-1PAPISID=TPMRXnKSgDFnsNPj/AHn0QC9CU3LdRoXzv; __Secure-3PAPISID=TPMRXnKSgDFnsNPj/AHn0QC9CU3LdRoXzv; LOGIN_INFO=AFmmF2swRQIgUo7NcKNUHK3f1riWkf3S8ZFoSBbo8P74B--l7ah47WMCIQCfshm0V-EzJ3TBjckDi0_Ia32xAuuOYiwirx8AMIRN7Q:QUQ3MjNmeWFtbkxsTEI5T1lGTjVCeWE0NklXcTUxMDUxOWVpY3ZiZ1I0SUwxQ25Hdm1lYmVLMlJ2WThmSEpqV2tWWmNGRDVNTVVGV3dkb0xtT3ZmSFRCMENvQjJOTDZLRnFod2hDNEFZcnJuNEJuSXpYdTV2QTd2cWxZX2ZHSUZhbEJRMjdZTE9LTnJfaTJjVmlpMUJvVkFfVkNzRG9UZzBB; SIDCC=AFvIBn8mheRUPM2os_P9cfKuphOXsgJLxemVM8ax0YnO60cVSz_j2Qdq_a0lA0mfbfBn0Owe0xY; __Secure-1PSIDCC=AFvIBn-d1QadKd9L-1yqAR01R8QSe0S9x7Fq9BSKjfy5pHAh01KwFtRxoGl4nHRXnKHtqRkNQdCH; __Secure-3PSIDCC=AFvIBn-EzpHbVgN8iSfND7FXlA8HspRF8NObOOZD10w2GuJ2hEoUiFwVdgXFI-2Ixf6aXQCX5Ho1
+dnt: 1
+origin: https://music.youtube.com
+referer: https://music.youtube.com/
+sec-ch-ua: "Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"
+sec-ch-ua-arch: "x86"
+sec-ch-ua-bitness: "64"
+sec-ch-ua-full-version: "111.0.5563.65"
+sec-ch-ua-full-version-list: "Google Chrome";v="111.0.5563.65", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.65"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-model
+sec-ch-ua-platform: "Windows"
+sec-ch-ua-platform-version: "10.0.0"
+sec-ch-ua-wow64: ?0
+sec-fetch-dest: empty
+sec-fetch-mode: same-origin
+sec-fetch-site: same-origin
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+x-client-data: CJW2yQEIorbJAQjBtskBCKmdygEI3dPKAQjC9soBCJahywEIjozNAQiXls0BCKiWzQEI4pfNAQjkl80BCM2YzQEItJrNAQjom80BCMuczQE=
+Decoded:
+message ClientVariations {
+  // Active client experiment variation IDs.
+  repeated int32 variation_id = [3300117, 3300130, 3300161, 3313321, 3320285, 3324738, 3330198, 3360270, 3361559, 3361576, 3361762, 3361764, 3361869, 3362100, 3362280, 3362379];
+}
+x-goog-authuser: 0
+x-goog-visitor-id: Cgt5bmhreEJsQzNHWSi6guGgBg%3D%3D
+x-origin: https://music.youtube.com
+x-youtube-bootstrap-logged-in: true
+x-youtube-client-name: 67
+x-youtube-client-version: 1.20230313.00.00
