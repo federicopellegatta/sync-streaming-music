@@ -1,10 +1,8 @@
 from ytmusicapi import YTMusic
-import pandas as pd
 import os
 from playlist import Playlist
 from song import Song
 from cli.bcolors import bcolors
-from utils.string_utils import title_case
 from dotenv import load_dotenv
 
 
