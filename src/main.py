@@ -1,7 +1,7 @@
 from cli.bcolors import bcolors
 from spotify import get_playlists, setup_Spotipy
 from yt_music import setup_YTMusic, sync_playlist
-from cli.menu import menu
+from cli.menu import main_menu
 from cli.operation import Operation
 
 
@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     playlists_dir = 'resources/playlists/'
 
-    operation: Operation = menu()
+    operation: Operation = main_menu()
 
     match operation:
 

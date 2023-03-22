@@ -3,7 +3,7 @@ import inquirer
 from cli.operation import Operation
 
 
-def menu() -> Operation:
+def main_menu() -> Operation:
     questions = [
         inquirer.List(
             "operation",
