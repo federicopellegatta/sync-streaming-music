@@ -39,4 +39,5 @@ def get_playlists(spotify: Spotify) -> list[Playlist]:
             f"{str(idx + 1).rjust(right_justify)}. {playlist.name} ({len(playlist.songs)} songs)")
         playlists.append(playlist)
 
+    print()
     return playlists

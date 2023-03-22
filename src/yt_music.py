@@ -61,7 +61,7 @@ def sync_playlist(playlist: Playlist, ytmusic: YTMusic):
     songs_to_sync = search_matches(playlist.songs, ytmusic)
 
     print(
-        f"Creating playlist \"{playlist.name}\" in your YouTube Music account...")
+        f"\nCreating playlist \"{playlist.name}\" in your YouTube Music account...")
     playlistId = ytmusic.create_playlist(
         playlist.name, playlist.description)
 
@@ -71,7 +71,7 @@ def sync_playlist(playlist: Playlist, ytmusic: YTMusic):
         lambda song: song.id, songs_to_sync))
 
     print(
-        f"{bcolors.OKBLUE}The \"{playlist.name}\" playlist has been synced to your YouTube Music account!{bcolors.ENDC}")
+        f"{bcolors.OKBLUE}\"{playlist.name}\" has been synced to your YouTube Music account!{bcolors.ENDC}")
 
 
 # def sync_playlists(ytmusic: YTMusic, playlists_dir: str) -> None:
