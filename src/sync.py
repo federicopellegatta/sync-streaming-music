@@ -1,7 +1,10 @@
 from cli.bcolors import bcolors
 from ytmusicapi import YTMusic
 from spotipy.client import Spotify
+from cli.menu import playlists_checkbox
 from cli.operation import Operation
+from spotify import get_playlists
+from yt_music import sync_playlist
 
 
 def sync_spotify_to_ytmusic(spotify: Spotify, ytmusic: YTMusic):
