@@ -1,5 +1,5 @@
 """Main file for the application."""
-from spotify import setup_Spotipy
+from spotify import setup_spotipy
 from sync import sync_spotify_to_ytmusic
 from yt_music import setup_YTMusic
 from cli.bcolors import bcolors
@@ -7,7 +7,7 @@ from cli.menu import main_menu
 from cli.operation import Operation
 
 if __name__ == "__main__":
-    spotify = setup_Spotipy()
+    spotify = setup_spotipy()
     ytmusic = setup_YTMusic()
 
     PLAYLIST_DIR = 'resources/playlists/'
