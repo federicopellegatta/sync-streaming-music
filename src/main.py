@@ -1,16 +1,16 @@
-from cli.bcolors import bcolors
+"""Main file for the application."""
 from spotify import setup_Spotipy
 from sync import sync_spotify_to_ytmusic
 from yt_music import setup_YTMusic
+from cli.bcolors import bcolors
 from cli.menu import main_menu
 from cli.operation import Operation
-
 
 if __name__ == "__main__":
     spotify = setup_Spotipy()
     ytmusic = setup_YTMusic()
 
-    playlists_dir = 'resources/playlists/'
+    PLAYLIST_DIR = 'resources/playlists/'
 
     operation: Operation = main_menu()
 
@@ -20,8 +20,8 @@ if __name__ == "__main__":
             sync_spotify_to_ytmusic(spotify, ytmusic)
 
         case Operation.SYNC_SPOTIFY_PLAYLISTS_WITH_YOUTUBE:
-            print(
-                f"{bcolors.HEADER}{bcolors.BOLD}{bcolors.UNDERLINE}{Operation.SYNC_SPOTIFY_PLAYLISTS_WITH_YOUTUBE.value}...{bcolors.ENDC}")
+            print(f"{bcolors.HEADER}{bcolors.BOLD}{bcolors.UNDERLINE}"
+                  f"{Operation.SYNC_SPOTIFY_PLAYLISTS_WITH_YOUTUBE.value}...{bcolors.ENDC}")
             print(f"{bcolors.WARNING}Not implemented yet...{bcolors.ENDC}")
 
         case _:
