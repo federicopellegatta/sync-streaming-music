@@ -72,9 +72,9 @@ def get_song_from_spotify_json(args) -> Song:
 
     match args["album"]["release_date_precision"]:
         case "day" | "month":
-            year = args["album"]["release_date"].split("-")[0]
+            year = int(args["album"]["release_date"].split("-")[0])
         case "year":
-            year = args["album"]["release_date"]
+            year = int(args["album"]["release_date"])
         case _:
             year = None
 
