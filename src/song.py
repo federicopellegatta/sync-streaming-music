@@ -1,5 +1,4 @@
 """This module contains the Song class and its methods."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -26,7 +25,7 @@ def join_artists_names(artists: list[str]) -> str:
     return ", ".join(artists)
 
 
-def get_song_from_ytmusic_json(args) -> Song:
+def get_song_from_ytmusic_json(args: dict) -> Song:
     """
     Creates a Song object from a YTMusic song1 JSON object.
 
@@ -42,10 +41,10 @@ def get_song_from_ytmusic_json(args) -> Song:
     """
     title = args["title"]
     artist = list(map(lambda a: a["name"], args["artists"]))
-    album = args["album"]["name"] if args["album"] is not None else None
+    album = args["album"]["name"] if "album" in args.keys() and args["album"] is not None else None
     duration = args["duration_seconds"]
-    is_explicit = args["isExplicit"]
-    year = args["year"]
+    is_explicit = args["isExplicit"] if "isExplicit" in args.keys() else False
+    year = args["year"] if "year" in args.keys() else None
     id = args["videoId"]
 
     return Song(title, artist, album, duration, is_explicit, year, id)
