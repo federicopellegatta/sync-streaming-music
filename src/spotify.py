@@ -28,8 +28,11 @@ def setup_spotipy() -> Spotify:
     scope = "playlist-read-private playlist-read-collaborative user-library-read"
 
     # spotify authentication
-    oauth = spotipy.SpotifyOAuth(client_id, client_secret, redirect_uri, scope)
-    return spotipy.Spotify(auth_manager=oauth)
+    oauth = spotipy.SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri,
+                                 scope=scope)
+    token_dict = oauth.get_access_token()
+    token = token_dict['access_token']
+    return spotipy.Spotify(auth=token)
 
 
 def get_playlists(spotify: Spotify) -> list[Playlist]:
