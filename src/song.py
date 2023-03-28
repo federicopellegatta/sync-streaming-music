@@ -27,12 +27,12 @@ def join_artists_names(artists: list[str]) -> str:
 
 def get_song_from_ytmusic_json(args: dict) -> Song:
     """
-    Creates a Song object from a YTMusic song1 JSON object.
+    Creates a Song object from a YTMusic song JSON object.
 
     Parameters
     ----------
     args : dict
-        The JSON object of the song1.
+        The JSON object of the song.
 
     Returns
     -------
@@ -52,12 +52,12 @@ def get_song_from_ytmusic_json(args: dict) -> Song:
 
 def get_song_from_spotify_json(args) -> Song:
     """
-    Creates a Song object from a Spotify song1 JSON object.
+    Creates a Song object from a Spotify song JSON object.
 
     Parameters
     ----------
     args : dict
-        The JSON object of the song1.
+        The JSON object of the song.
 
     Returns
     -------
@@ -86,26 +86,26 @@ def get_song_from_spotify_json(args) -> Song:
 @dataclass
 class Song:
     """
-    This class represents a song1.
+    This class represents a song.
 
     Attributes
     ----------
     id : str
-        The ID of the song1.
+        The ID of the song.
     title : str
-        The title of the song1.
+        The title of the song.
     artists : list[str]
         The list of artists names.
     album : str
         The album name.
     duration : int
-        The duration of the song1 in seconds.
+        The duration of the song in seconds.
     is_explicit : bool
-        Whether the song1 is explicit or not.
+        Whether the song is explicit or not.
     year : int
-        The year of the song1.
+        The year of the song.
     id : str
-        The ID of the song1.
+        The ID of the song.
     """
 
     def __init__(self, title: str, artists: list[str], album: str, duration: int = None, is_explicit: bool = False,
@@ -116,19 +116,19 @@ class Song:
         Parameters
         ----------
         title : str
-            The title of the song1.
+            The title of the song.
         artists : list[str]
             The list of artists names.
         album : str
             The album name.
         duration : int, optional
-            The duration of the song1 in seconds, by default None
+            The duration of the song in seconds, by default None
         is_explicit : bool, optional
-            Whether the song1 is explicit or not, by default False
+            Whether the song is explicit or not, by default False
         year : int, optional
-            The year of the song1, by default None
+            The year of the song, by default None
         id : str, optional
-            The ID of the song1 on Spotify or YouTube Music service, by default None
+            The ID of the song on Spotify or YouTube Music service, by default None
         """
         self.id: str = id
         self.title: str = title
@@ -140,7 +140,7 @@ class Song:
 
     def get_search_query(self) -> str:
         """
-        Returns the search query for the song1.
+        Returns the search query for the song.
 
         Returns
         -------
@@ -149,15 +149,15 @@ class Song:
 
         Examples
         --------
-        >>> song1 = Song("Knockin' On Heaven's Door", ["Guns N' Roses"], "Use Your Illusion II", 336, False, 1991)
-        >>> song1.get_search_query()
+        >>> song = Song("Knockin' On Heaven's Door", ["Guns N' Roses"], "Use Your Illusion II", 336, False, 1991)
+        >>> song.get_search_query()
         'Guns N' Roses - Knockin' On Heaven's Door (Use Your Illusion II)'
         """
         return join_artists_names(self.artists) + " - " + self.title + " (" + self.album + ")"
 
     def get_search_result(self, ytmusic: YTMusic) -> Song:
         """
-        Returns the best search result on YouTube Music for the song1.
+        Returns the best search result on YouTube Music for the song.
 
         Parameters
         ----------
@@ -185,19 +185,19 @@ class Song:
 
     def is_similar(self, other: Song, is_detailed_search: bool = True) -> bool:
         """
-        Returns whether the song1 is similar to another song1.
+        Returns whether the song is similar to another song.
 
         Parameters
         ----------
         other : Song
-            The other song1.
+            The other song.
         is_detailed_search : bool, optional
             Whether the search is detailed or not, by default True
 
         Returns
         -------
         bool
-            Whether the song1 is similar to another song1.
+            Whether the song is similar to another song.
         """
         return (self.is_similar_title(other.title, is_detailed_search) and
                 self.is_similar_artists(other.artists, is_detailed_search) and
@@ -205,23 +205,23 @@ class Song:
                 self.is_live() == other.is_live() and
                 self.is_similar_duration(other.duration) and
                 self.is_explicit == other.is_explicit and
-                (self.year == other.year if self.year is not None and other.year is not None else True))
+                self.is_similar_year(other.year))
 
     def is_similar_title(self, title: str, is_detailed_search: bool = True) -> bool:
         """
-        Returns whether the song1 title is similar to another song1 title.
+        Returns whether the song title is similar to another song title.
 
         Parameters
         ----------
         title : str
-            The other song1 title.
+            The other song title.
         is_detailed_search : bool, optional
             Whether the search is detailed or not, by default True
 
         Returns
         -------
         bool
-            Whether the song1 title is similar to another song1 title.
+            Whether the song title is similar to another song title.
         """
         self_title = self.title if is_detailed_search else remove_parenthesis_content(
             get_string_before_dash(self.title))
@@ -232,12 +232,12 @@ class Song:
 
     def is_similar_artists(self, artists: list[str], is_detailed_search: bool = True) -> bool:
         """
-        Returns whether the song1 artists are similar to another song1 artists.
+        Returns whether the song artists are similar to another song artists.
 
         Parameters
         ----------
         artists : list[str]
-            The other song1 artists.
+            The other song artists.
         is_detailed_search : bool, optional
             Whether the search is detailed or not, by default True.
             If True, the artists names must be in the same order.
@@ -246,18 +246,18 @@ class Song:
         Returns
         -------
         bool
-            Whether the song1 artists are similar to another song1 artists.
+            Whether the song artists are similar to another song artists.
 
         Examples
         --------
-        >>> song1 = Song("Knockin' On Heaven's Door", ["Guns N' Roses"], "Use Your Illusion II", 336, False, 1991)
-        >>> song1.is_similar_artists(["Guns N' Roses"], True)
+        >>> song = Song("Knockin' On Heaven's Door", ["Guns N' Roses"], "Use Your Illusion II", 336, False, 1991)
+        >>> song.is_similar_artists(["Guns N' Roses"], True)
         True
-        >>> song1.is_similar_artists(["Guns N' Roses"], False)
+        >>> song.is_similar_artists(["Guns N' Roses"], False)
         True
-        >>> song1.is_similar_artists(["Guns N' Roses", "Axl Rose"], True)
+        >>> song.is_similar_artists(["Guns N' Roses", "Axl Rose"], True)
         False
-        >>> song1.is_similar_artists(["Guns N' Roses", "Axl Rose"], False)
+        >>> song.is_similar_artists(["Guns N' Roses", "Axl Rose"], False)
         True
         """
         if is_detailed_search:
@@ -268,49 +268,65 @@ class Song:
 
     def is_similar_album(self, album: str, is_detailed_search: bool = True) -> bool:
         """
-        Returns whether the song1 album is similar to another song1 album.
+        Returns whether the song album is similar to another song album.
 
         Parameters
         ----------
         album : str
-            The other song1 album.
+            The other song album.
         is_detailed_search : bool, optional
             Whether the search is detailed or not, by default True.
 
         Returns
         -------
         bool
-            Whether the song1 album is similar to another song1 album.
+            Whether the song album is similar to another song album.
         """
         return string_similarity(remove_parenthesis_content(self.album),
                                  remove_parenthesis_content(album)) > 0.5 if is_detailed_search else True
 
     def is_live(self) -> bool:
         """
-        Returns whether the song1 is a live version.
+        Returns whether the song is a live version.
 
         Returns
         -------
         bool
-            Whether the song1 is a live version.
+            Whether the song is a live version.
         """
         return "live" in self.title.lower()
 
     def is_similar_duration(self, duration: int) -> bool:
         """
-        Returns True if the duration of the song1 is within 10 seconds of the other song1 duration.
+        Returns wheter the duration of the song is within 10 seconds of the other song duration.
 
         Parameters
         ----------
         duration : int
-            The other song1 duration in seconds.
+            The other song duration in seconds.
 
         Returns
         -------
         bool
-            Whether the song1 duration is similar to another song1 duration.
+            Whether the song duration is similar to another song duration.
         """
         return abs(self.duration - duration) < 10 if self.duration is not None and duration is not None else True
+
+    def is_similar_year(self, year):
+        """
+        Returns whether the song release year is similar to another song release year.
+
+        Parameters
+        ----------
+        year : int
+            The other song release year.
+
+        Returns
+        -------
+        bool
+            Whether the other song release year is similar to another song release year.
+        """
+        return self.year == year if self.year is not None and year is not None else True
 
     def __str__(self):
         return join_artists_names(self.artists) + " - " + self.title + " (" + self.album + ")"
