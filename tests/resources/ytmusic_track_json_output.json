@@ -1,0 +1,37 @@
+{
+  "category": "Songs",
+  "resultType": "song",
+  "title": "Knockin' On Heaven's Door",
+  "album": {
+    "name": "Use Your Illusion II",
+    "id": "MPREb_BWthKEBKL9Y"
+  },
+  "feedbackTokens": {
+    "add": "AB9zfpLmS0KgCFYu_APZuZ0nLve6ym2Y3s0im9uU0_EILH6mtRFThgC5FCcV8RuooJDSx6-PnNW_MJcB8u-ZTRotLZ2hpUajsg",
+    "remove": "AB9zfpJ6eTjBcRS9C1qmaqvZ7cCaL0_8Hk1mNTMJ2hQIzCiMxCB258Ko124YNpdg9qhZ2U78F0eQWGETRZi8cdu-CnNfuL7rrw"
+  },
+  "videoId": "f8OHybVhQwc",
+  "videoType": "MUSIC_VIDEO_TYPE_ATV",
+  "duration": "5:36",
+  "year": null,
+  "artists": [
+    {
+      "name": "Guns N' Roses",
+      "id": "UCSLbbBoUqpin6BE34whSOvA"
+    }
+  ],
+  "duration_seconds": 336,
+  "isExplicit": false,
+  "thumbnails": [
+    {
+      "url": "https://lh3.googleusercontent.com/Q7XFwlxOBgvsK4ZPyK855aeG5piiewmvIWhN_6aoAfe4hn0uqKQ2vzEOLr-CRLuohr0RwuIo7p4rCdE=w60-h60-l90-rj",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "url": "https://lh3.googleusercontent.com/Q7XFwlxOBgvsK4ZPyK855aeG5piiewmvIWhN_6aoAfe4hn0uqKQ2vzEOLr-CRLuohr0RwuIo7p4rCdE=w120-h120-l90-rj",
+      "width": 120,
+      "height": 120
+    }
+  ]
+}
