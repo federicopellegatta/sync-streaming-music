@@ -39,8 +39,8 @@ def setup_ytmusic() -> YTMusic:
     """
     load_dotenv()
 
-    header_raw = read_file("./header_raw.txt")
-    header_json_path = "./resources/headers_auth.json"
+    header_raw = os.getenv("YTMUSIC_HEADER_RAW")
+    header_json_path = "./headers_auth.json"
     YTMusic.setup(filepath=header_json_path, headers_raw=header_raw)
     ytmusic = YTMusic(header_json_path)
     os.remove(header_json_path)
